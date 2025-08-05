@@ -1,0 +1,22 @@
+[
+  {
+    "name": "iPhone 13",
+    "description": "Apple's 2021 flagship phone with A15 Bionic chip and dual-camera system."
+  },
+  {
+    "name": "Samsung Galaxy S21",
+    "description": "Samsung's premium Android phone with 120Hz AMOLED display and Exynos 2100."
+  },
+  {
+    "name": "Google Pixel 6",
+    "description": "Google's in-house Tensor-powered smartphone with excellent camera software."
+  },
+  {
+    "name": "OnePlus 9T Pro",
+    "description": "Performance-focused flagship with 120Hz Fluid AMOLED and Hasselblad-tuned camera."
+  },
+  {
+    "name": "Redmi Note 9",
+    "description": "Budget-friendly Xiaomi device with large display and solid battery life."
+  }
+]
