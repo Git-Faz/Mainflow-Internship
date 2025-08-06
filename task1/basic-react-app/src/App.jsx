@@ -10,7 +10,6 @@ const App = () => {
       try {
         const response = await fetch('/items.json');
         const data = await response.json();
-        // Instead of extracting just names, let's pass the full objects
         setItems(data);
       } catch (error) {
         console.error('Error loading items:', error);
