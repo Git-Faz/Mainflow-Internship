@@ -1,0 +1,7 @@
+@import "tailwindcss";
+*{
+    @apply box-border;
+}
+body{
+    background-color: rgb(14, 14, 14);
+}

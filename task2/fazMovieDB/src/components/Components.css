@@ -1,0 +1,14 @@
+/*Stylesheet for components*/
+
+.banner::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.banner h1 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    line-height: 100px;
+}
