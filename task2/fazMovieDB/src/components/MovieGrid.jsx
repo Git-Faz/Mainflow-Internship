@@ -1,36 +1,40 @@
-import MovieCard from "./MovieCard.jsx";
+import Card from "./Card.jsx";
 import { useEffect, useState } from "react";
-import {getPopularMovies} from "../services/MovieService.js";
 
-const MovieGrid = () => {
-  const [movies, setMovies] = useState([]);
-  const [series, setSeries] = useState([]);
+const MovieGrid = ({ fetchData }) => {
 
+  const [items, setItems] = useState([]);
+  const imgLink = "https://image.tmdb.org/t/p/w500";
+  
   useEffect(() => {
-    const fetchMovies = async () => {
+    const fetchItems = async () => {
       try {
-        const movieData = await getPopularMovies();
-        setMovies(movieData);
+        const data = await fetchData();
+        setItems(data);
       } catch (error) {
         console.error("Error fetching movies:", error);
       }
     };
 
-    fetchMovies();
-  }, []);
+    fetchItems();
+  }, [fetchData]);
 
   return (
-    <div className="movie-grid flex flex-row mx-4 ">
-      {movies.map((movie) => (
-        <MovieCard
-          key={movie.id}
-          title={movie.title}
-          image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-          description={movie.overview}
+    <div className="movie-grid flex flex-row mx-4 my-4 flex-wrap justify-center ">
+      {items.map((item) => (
+        <Card
+          key={item.id}
+          title={item.title || item.name}
+          image={
+            item.poster_path
+              ? `${imgLink}${item.poster_path}`
+              : `${imgLink}${item.profile_path}`
+          }
+          description={item.overview}
         />
       ))}
     </div>
   );
 };
-export default MovieGrid;
 
+export default MovieGrid;
