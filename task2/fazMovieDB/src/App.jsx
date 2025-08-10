@@ -17,9 +17,9 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/movies" element={<Movies />} />
-        <Route path="/series" element={<Series />} />
-        <Route path="/celebrities" element={<Celebrities />} />
-        <Route path="/info" element={<Info />} />
+        <Route path="/tv" element={<Series />} />
+        <Route path="/people" element={<Celebrities />} />
+        <Route path="/:type/:id" element={<Info />} />
       </Routes>
 
       <Footer
@@ -28,7 +28,6 @@ const App = () => {
         logo={footerLogo}
       />
     </BrowserRouter>
-
   );
 };
 

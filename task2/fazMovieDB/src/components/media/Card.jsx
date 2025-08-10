@@ -1,14 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const Card = ({ title, image, description }) => {
+const Card = ({ title, image, description, id, type }) => {
+    const navigate = useNavigate();
 
     const handleClick = () => {
         console.log(`Clicked on ${title}`);
-        return(
-            <Link to={`/info`} className="text-blue-500 hover:underline">
-                {title}
-            </Link>
-        ) // Example of navigating to a details page
+        navigate(`/${type}/${id}`);
     };
 
 return (

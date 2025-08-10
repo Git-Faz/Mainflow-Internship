@@ -1,7 +1,7 @@
 import Card from "./Card.jsx";
 import { useEffect, useState } from "react";
 
-const MovieGrid = ({ fetchData }) => {
+const MovieGrid = ({ fetchData, type, className }) => {
 
   const [items, setItems] = useState([]);
   const imgLink = "https://image.tmdb.org/t/p/w500";
@@ -20,10 +20,12 @@ const MovieGrid = ({ fetchData }) => {
   }, [fetchData]);
 
   return (
-    <div className="movie-grid flex flex-row mx-4 my-4 flex-wrap justify-center ">
+    <div className={`movie-grid flex flex-row flex-wrap justify-center my-2 ${className}`}>
       {items.map((item) => (
         <Card
           key={item.id}
+          id={item.id}
+          type={type}
           title={item.title || item.name}
           image={
             item.poster_path

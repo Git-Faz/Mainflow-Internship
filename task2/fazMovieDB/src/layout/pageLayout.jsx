@@ -1,7 +1,16 @@
 import { HomeIcon, MagnifyingGlassCircleIcon } from '@heroicons/react/24/solid'
+import React,{ useState } from 'react';
 import { Link } from "react-router-dom";
 
 const Navbar = ({ logo }) => {
+
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const search = (event) => {
+    setSearchQuery(event.target.value);
+    console.log("Searching for:", searchQuery);
+  };
+
   return (
     <div className="navbar border-b-1 border-green-500 sticky top-0 z-50 w-full" style={{ boxShadow: '0 4px 10px rgba(34,197,94,0.5)' }}>
       <nav className="flex justify-between items-center bg-black text-white p-2">
@@ -17,13 +26,13 @@ const Navbar = ({ logo }) => {
               Movies
             </Link>
             <Link
-              to="/series"
+              to="/tv"
               className="border-b-2 border-transparent hover:border-blue-400 p-1"
             >
               TV Shows
             </Link>
             <Link
-              to="/celebrities"
+              to="/people"
               className="border-b-2 border-transparent hover:border-blue-400 p-1"
             >
               Celebrities
@@ -32,17 +41,18 @@ const Navbar = ({ logo }) => {
         </div>
 
         <div className="flex flex-row items-center space-x-4">
-          <div className="flex flex-row items-center border-b-2 border-blue-400 bg-transparent">
+          <div className={`flex flex-row items-center border-b-2 hover:border-blue-500 ${searchQuery ? 'border-blue-500' : 'border-green-500'} bg-transparent`}>
             <input
               type="search"
               placeholder="Search..."
-              className="p-2 bg-transparent text-white placeholder-gray-400 focus:outline-none w-48 md:w-64"
+              className="p-2 bg-transparent text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none w-48 md:w-64"
+              onChange={search}
             />
-          <MagnifyingGlassCircleIcon className="size-8 text-blue-500 cursor-pointer" onClick={() => {console.log("Search clicked");
+          <MagnifyingGlassCircleIcon className={`size-8 hover:text-blue-500 ${searchQuery ? 'text-blue-500' : 'text-green-500'} cursor-pointer`} onClick={() => {console.log("Search clicked");
           }} />
           </div>
           <Link to="/" className="flex items-center gap-2">
-            <HomeIcon className="w-6 h-6 text-green-500" />
+            <HomeIcon className="w-6 h-6 text-green-500 hover:text-blue-500" />
           </Link>
         </div>
       </nav>

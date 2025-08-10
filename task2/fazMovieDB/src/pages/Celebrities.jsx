@@ -1,13 +1,9 @@
-import Heading from "../components/Titles";
-import MovieGrid from "../components/MovieGrid";
+import MediaPage from "../components/MediaPage";
 import { getCelebs } from "../services/MovieService";
 
 const Celebrities = () => {
   return (
-    <div>
-      <Heading heading={"Celebrities"} />
-      <MovieGrid fetchData={getCelebs} />
-    </div>
+    <MediaPage heading={"Celebrities"} fetchData={getCelebs} type={"person"}/>
   );
 };
 

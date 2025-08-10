@@ -1,15 +1,14 @@
-import Heading from "../components/Titles";
-import MovieGrid from "../components/MovieGrid";
+import MediaPage from "../components/MediaPage";
 import { getSeries } from "../services/MovieService";
+
 const Series = () => {
+
   return (
-    <div>
-      <Heading heading={"TV Shows"} />
-      <MovieGrid fetchData={getSeries} />
-    </div>
+    <MediaPage heading={"TV Shows"} fetchData={getSeries} type={"tv"} />
   );
 };
 
 export default Series;
+
 
 
