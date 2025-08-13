@@ -4,7 +4,7 @@ import { getMovies } from "../services/MovieService";
 const Movies = () => {
 
   return (
-    <MediaPage heading={"Movies"} fetchData={getMovies} type={"movie"} />
+    <MediaPage heading={"Movies"} fetchData={getMovies} type={"movie"}/>
   );
 
 };

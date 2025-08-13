@@ -16,10 +16,9 @@ const Info = () => {
   const isDetailPage = Boolean(id);// if id exists => detail page
 
   const vidCondition = (vid) => {
-    return vid.site === "YouTube" &&
+    return (vid.site === "YouTube" || vid.site === "IMDB") &&
            (vid.type === "Trailer" || vid.type === "Teaser") &&
-          //  vid.official === true &&
-           vid.size === 1080;
+           (vid.size === 1080 || vid.size === 720);
   }
 
   useEffect(() => {
@@ -68,7 +67,7 @@ const Info = () => {
   };
 
   return (
-    <div className="info grid grid-cols-3 gap-4 text-white m-4 p-4 content-start items-center-safe h-fit">
+    <div className="info grid grid-cols-3 gap-4 text-white m-4 p-4 content-start items-start h-fit">
       {/* Show category heading only on listing pages */}
       {!isDetailPage && <Heading heading={isType()} className={"flex shrink-0"}/>}
 
@@ -84,7 +83,7 @@ const Info = () => {
                 : "/placeholder.jpg"
             }
             alt={data?.title || data?.name}
-            className="w-full h-auto object-cover mt-2"
+            className="w-full h-auto object-cover mt-6"
           />
         </div>
 

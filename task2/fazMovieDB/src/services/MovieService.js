@@ -3,7 +3,25 @@ import axios from "axios";
 const baseURL = "https://api.themoviedb.org/3";
 const tmdb_api = import.meta.env.VITE_API_KEY;
 
-const getMovies = async () => {
+const searchResults = async (query) => {
+  try{
+    const response = await axios.get(`${baseURL}/search/multi`, {
+      params:{
+        api_key: tmdb_api,
+        query: query,
+        include_adult: "false",
+        language: "en-US",
+        page: "1"
+      }
+    });
+    return response.data.results;
+  } catch (error) {
+    console.error("Error fetching search results:", error);
+    throw error;
+  }
+}
+
+const getMovies = async (page) => {
   try {
     const response = await axios.get(`${baseURL}/discover/movie`, {
       params: {
@@ -11,7 +29,7 @@ const getMovies = async () => {
         include_adult: "true",
         include_video: "false",
         language: "en-US",
-        page: "1",
+        page,
         sort_by: "popularity.desc",
       },
     });
@@ -22,13 +40,13 @@ const getMovies = async () => {
   }
 };
 
-const getPopularMovies = async () => {
+const getPopularMovies = async (page) => {
   try {
     const response = await axios.get(`${baseURL}/movie/popular`, {
       params: {
         api_key: tmdb_api,
         language: "en-US",
-        page: 1,
+        page,
       },
     });
     const movieList = response.data.results.splice(0, 6); // Get only the first 6 movies (FOR NOW)
@@ -69,7 +87,7 @@ const getMovieVids= async (movieId) => {
   }
 }
 
-const getSeries = async () => {
+const getSeries = async (page) => {
   try {
     const response = await axios.get(`${baseURL}/discover/tv`, {
       params: {
@@ -77,7 +95,7 @@ const getSeries = async () => {
         include_adult: "false",
         include_null_first_air_dates: "false",
         language: "en-US",
-        page: "1",
+        page,
         sort_by: "popularity.desc",
         media_type: "tv"
       },
@@ -89,13 +107,13 @@ const getSeries = async () => {
   }
 };
 
-const getPopularSeries = async () => {
+const getPopularSeries = async (page) => {
   try {
     const response = await axios.get(`${baseURL}/tv/popular`, {
       params: {
         api_key: tmdb_api,
         language: "en-US",
-        page: 1,
+        page,
         media_type: "tv"
       },
     });
@@ -139,30 +157,38 @@ const getSeriesVids = async (seriesId) => {
   }
 };
 
-const getTopRated = async () => {
+const getTopRated = async (page) => {
   try {
     const response = await axios.get(`${baseURL}/movie/top_rated`, {
       params: {
         api_key: tmdb_api,
         language: "en-US",
-        page: 1,
+        page,
       },
     });
-    const topRatedList = response.data.results.splice(0, 6); // Get only the first 5 top-rated movies (FOR NOW)
-    return topRatedList;
+    const response2 = await axios.get(`${baseURL}/tv/top_rated`, {
+      params: {
+        api_key: tmdb_api,
+        language: "en-US",
+        page,
+      },
+    });
+    const topRatedList = response.data.results.splice(0, 3); // Get only the first 3 top-rated movies (FOR NOW)
+    const topRatedSeries = response2.data.results.splice(0, 3); // Get only the first 3 top-rated series (FOR NOW)
+    return [ ...topRatedList, ...topRatedSeries ];
   } catch (error) {
     console.error("Error fetching top-rated movies:", error);
     throw error;
   }
 };
 
-const getCelebs = async () => {
+const getCelebs = async (page) => {
   try {
     const response = await axios.get(`${baseURL}/person/popular`, {
       params: {
         api_key: tmdb_api,
         language: "en-US",
-        page: 1,
+        page,
       },
     });
     return response.data.results;
@@ -189,4 +215,4 @@ const getCelebDetails = async (celebId) => {
 
 export { getMovies, getPopularMovies, getMovieDetails, getMovieVids,
         getSeries, getPopularSeries, getSeriesDetails, getSeriesVids,
-        getTopRated, getCelebs, getCelebDetails };
+        getTopRated, getCelebs, getCelebDetails, searchResults };

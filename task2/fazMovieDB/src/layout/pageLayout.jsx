@@ -1,15 +1,68 @@
 import { HomeIcon, MagnifyingGlassCircleIcon } from '@heroicons/react/24/solid'
 import React,{ useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { searchResults } from '../services/MovieService';
+import Info from '../pages/Info';
 
 const Navbar = ({ logo }) => {
 
-  const [searchQuery, setSearchQuery] = useState("");
+  const SearchBar = () => {
 
-  const search = (event) => {
-    setSearchQuery(event.target.value);
-    console.log("Searching for:", searchQuery);
+    const [search, setsearch] = useState("");
+    const [results, setResults] = useState([]);
+    const navigate = useNavigate();
+
+    const handleSearch = (event) => {
+      setsearch(event.target.value);
+      console.log("Searching for:", event.target.value);
+      if (event.target.value.length > 3) {
+        searchResults(event.target.value)
+          .then(results => {
+            console.log("Search results:", results);
+            setResults(results);
+          })
+          .catch(error => {
+            console.error("Error fetching search results:", error);
+          });
+      }
+    };
+
+    const handleResultClick = (result) => {
+      console.log("Result clicked:", result);
+      navigate(`/${result.media_type}/${result.id}`);
+    };
+
+    return (
+      <div
+        className={`flex flex-row items-center border-b-2 hover:border-blue-500 ${
+          search ? "border-blue-500" : "border-green-500"
+        } bg-transparent`}
+      >
+        <input
+          type="search"
+          placeholder="Search..."
+          className="p-2 bg-transparent text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none w-48 md:w-64"
+          onChange={handleSearch}
+        />
+        <MagnifyingGlassCircleIcon
+          className={`size-8 hover:text-blue-500 ${
+            search ? "text-blue-500" : "text-green-500"
+          } cursor-pointer`}
+          onClick={handleSearch}
+        />
+        {results.length > 0 && (
+          <div className="absolute bg-black text-white mt-2 rounded-md shadow-lg">
+            {results.map((result, index) => (
+              <div key={index} className="p-2 border-b border-gray-700 hover:bg-gray-800" onClick={() => handleResultClick(result)}>
+                {result.title}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    );
   };
+
 
   return (
     <div className="navbar border-b-1 border-green-500 sticky top-0 z-50 w-full" style={{ boxShadow: '0 4px 10px rgba(34,197,94,0.5)' }}>
@@ -37,20 +90,17 @@ const Navbar = ({ logo }) => {
             >
               Celebrities
             </Link>
+            <Link
+              to="/genres"
+              className="border-b-2 border-transparent hover:border-blue-400 p-1"
+            >
+              Genres
+            </Link>
           </div>
         </div>
 
         <div className="flex flex-row items-center space-x-4">
-          <div className={`flex flex-row items-center border-b-2 hover:border-blue-500 ${searchQuery ? 'border-blue-500' : 'border-green-500'} bg-transparent`}>
-            <input
-              type="search"
-              placeholder="Search..."
-              className="p-2 bg-transparent text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none w-48 md:w-64"
-              onChange={search}
-            />
-          <MagnifyingGlassCircleIcon className={`size-8 hover:text-blue-500 ${searchQuery ? 'text-blue-500' : 'text-green-500'} cursor-pointer`} onClick={() => {console.log("Search clicked");
-          }} />
-          </div>
+          <SearchBar />
           <Link to="/" className="flex items-center gap-2">
             <HomeIcon className="w-6 h-6 text-green-500 hover:text-blue-500" />
           </Link>

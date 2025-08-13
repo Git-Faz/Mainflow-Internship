@@ -1,7 +1,7 @@
-const Heading = ({ heading, className }) =>{
+const Heading = ({ heading, className, hClass }) =>{
   return(
     <div className={`mx-2 ${className}`}>
-      <h1 className={`flex justify-start text-4xl font-medium p-2 border-b-2 border-green-500 text-white text-left w-fit`}>
+      <h1 className={`flex justify-start text-4xl font-medium p-2 border-b-2 border-green-500 text-white text-left w-fit ${hClass}`}>
         {heading}
       </h1>
     </div>
