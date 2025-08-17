@@ -9,7 +9,7 @@ const searchResults = async (query) => {
       params:{
         api_key: tmdb_api,
         query: query,
-        include_adult: "false",
+        include_adult: "true",
         language: "en-US",
         page: "1"
       }
@@ -20,6 +20,42 @@ const searchResults = async (query) => {
     throw error;
   }
 }
+
+/* const getGenres = async () => {
+  //parallel requests
+  const urls = [`${baseURL}/genre/movie/list`, `${baseURL}/genre/tv/list`];
+  try {
+    const responses = await Promise.all(urls.map(url =>
+      axios.get(url, {
+        params: {
+          api_key: tmdb_api,
+          language: "en-US",
+        }
+      })
+    ));
+    const movieGenres = responses[0].data.genres;
+    const tvGenres = responses[1].data.genres;
+    return { movieGenres, tvGenres };
+  } catch (error) {
+    console.error("Error fetching genres:", error);
+    throw error;
+  }
+}; */
+
+const getMovieGenres = async () => {
+  try {
+    const response = await axios.get(`${baseURL}/genre/movie/list`, {
+      params: {
+        api_key: tmdb_api,
+        language: "en-US",
+      },
+    });
+    return response.data.genres;
+  } catch (error) {
+    console.error("Error fetching movie genres:", error);
+    throw error;
+  }
+};
 
 const getMovies = async (page) => {
   try {
@@ -58,34 +94,32 @@ const getPopularMovies = async (page) => {
 };
 
 const getMovieDetails = async (movieId) => {
+  const urls = [
+    `${baseURL}/movie/${movieId}`,
+    `${baseURL}/movie/${movieId}/credits`,
+    `${baseURL}/movie/${movieId}/videos`,
+  ];
   try {
-    const response = await axios.get(`${baseURL}/movie/${movieId}`, {
-      params: {
-        api_key: tmdb_api,
-        language: "en-US",
-      },
-    });
-    return response.data;
+    const [movieResponse, creditsResponse, videosResponse] = await Promise.all(
+      urls.map((url) =>
+        axios.get(url, {
+          params: {
+            api_key: tmdb_api,
+            language: "en-US",
+          },
+        })
+      )
+    );
+    return {
+      ...movieResponse.data,
+      credits: creditsResponse.data,
+      videos: videosResponse.data,
+    };
   } catch (error) {
     console.error("Error fetching movie details:", error);
     throw error;
   }
 };
-
-const getMovieVids= async (movieId) => {
-  try{
-    const response = await axios.get(`${baseURL}/movie/${movieId}/videos`,{
-      params:{
-        api_key: tmdb_api,
-        language: 'en-US'
-      }
-    })
-    return response.data.results;
-  }catch (error){
-    console.error("Error fetching videos", error)
-    throw error
-  }
-}
 
 const getSeries = async (page) => {
   try {
@@ -126,33 +160,45 @@ const getPopularSeries = async (page) => {
 };
 
 const getSeriesDetails = async (seriesId) => {
+
+  const urls = [
+    `${baseURL}/tv/${seriesId}`,
+    `${baseURL}/tv/${seriesId}/credits`,
+    `${baseURL}/tv/${seriesId}/videos`,
+  ];
   try {
-    const response = await axios.get(`${baseURL}/tv/${seriesId}`, {
-      params: {
-        api_key: tmdb_api,
-        language: "en-US",
-        media_type: "tv"
-      },
-    });
-    console.log("Series details fetched successfully:", response.data);
-    return response.data;
+    const [seriesResponse, creditsResponse, videosResponse] = await Promise.all(
+      urls.map((url) =>
+        axios.get(url, {
+          params: {
+            api_key: tmdb_api,
+            language: "en-US",
+          },
+        })
+      )
+    );
+    return {
+      ...seriesResponse.data,
+      credits: creditsResponse.data,
+      videos: videosResponse.data,
+    };
   } catch (error) {
     console.error("Error fetching series details:", error);
     throw error;
   }
 };
 
-const getSeriesVids = async (seriesId) => {
+const getSeriesGenres = async () => {
   try {
-    const response = await axios.get(`${baseURL}/tv/${seriesId}/videos`, {
+    const response = await axios.get(`${baseURL}/genre/tv/list`, {
       params: {
         api_key: tmdb_api,
         language: "en-US",
       },
     });
-    return response.data.results;
+    return response.data.genres;
   } catch (error) {
-    console.error("Error fetching series videos:", error);
+    console.error("Error fetching series genres:", error);
     throw error;
   }
 };
@@ -213,6 +259,6 @@ const getCelebDetails = async (celebId) => {
   }
 };
 
-export { getMovies, getPopularMovies, getMovieDetails, getMovieVids,
-        getSeries, getPopularSeries, getSeriesDetails, getSeriesVids,
+export { getMovies, getPopularMovies, getMovieDetails, getMovieGenres,
+        getSeries, getPopularSeries, getSeriesDetails, getSeriesGenres,
         getTopRated, getCelebs, getCelebDetails, searchResults };

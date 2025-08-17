@@ -9,3 +9,7 @@ body{
 button{
     @apply cursor-pointer;
 }
+
+.image {
+    @apply w-full h-auto object-cover rounded-md cursor-pointer;
+}
