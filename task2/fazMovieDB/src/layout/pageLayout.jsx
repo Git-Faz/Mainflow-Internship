@@ -1,68 +1,8 @@
-import { HomeIcon, MagnifyingGlassCircleIcon } from '@heroicons/react/24/solid'
-import React,{ useState } from 'react';
-import { Link, useNavigate } from "react-router-dom";
-import { searchResults } from '../services/MovieService';
-import Info from '../pages/Info';
+import { HomeIcon } from '@heroicons/react/24/solid';
+import { Link } from "react-router-dom";
+import SearchBar from './SearchBar.jsx';
 
 const Navbar = ({ logo }) => {
-
-  const SearchBar = () => {
-
-    const [search, setsearch] = useState("");
-    const [results, setResults] = useState([]);
-    const navigate = useNavigate();
-
-    const handleSearch = (event) => {
-      setsearch(event.target.value);
-      console.log("Searching for:", event.target.value);
-      if (event.target.value.length > 3) {
-        searchResults(event.target.value)
-          .then(results => {
-            console.log("Search results:", results);
-            setResults(results);
-          })
-          .catch(error => {
-            console.error("Error fetching search results:", error);
-          });
-      }
-    };
-
-    const handleResultClick = (result) => {
-      console.log("Result clicked:", result);
-      navigate(`/${result.media_type}/${result.id}`);
-    };
-
-    return (
-      <div
-        className={`flex flex-row items-center border-b-2 hover:border-blue-500 ${
-          search ? "border-blue-500" : "border-green-500"
-        } bg-transparent`}
-      >
-        <input
-          type="search"
-          placeholder="Search..."
-          className="p-2 bg-transparent text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none w-48 md:w-64"
-          onChange={handleSearch}
-        />
-        <MagnifyingGlassCircleIcon
-          className={`size-8 hover:text-blue-500 ${
-            search ? "text-blue-500" : "text-green-500"
-          } cursor-pointer`}
-          onClick={handleSearch}
-        />
-        {results.length > 0 && (
-          <div className="absolute bg-black text-white mt-2 rounded-md shadow-lg">
-            {results.map((result, index) => (
-              <div key={index} className="p-2 border-b border-gray-700 hover:bg-gray-800" onClick={() => handleResultClick(result)}>
-                {result.title}
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-    );
-  };
-
 
   return (
     <div className="navbar border-b-1 border-green-500 sticky top-0 z-50 w-full" style={{ boxShadow: '0 4px 10px rgba(34,197,94,0.5)' }}>
