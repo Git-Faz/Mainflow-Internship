@@ -5,10 +5,12 @@ import Home from "./pages/Home";
 import Movies from "./pages/Movies";
 import Series from "./pages/Series";
 import Info from "./pages/Info";
-import Genres from "./pages/Genres";
+import GenrePage from "./pages/GenrePage";
+import GenreListPage from "./pages/GenreListPage";
 import Celebrities from "./pages/Celebrities";
 import footerLogo from "./assets/github.svg";
 import "./App.css";
+
 
 const App = () => {
   return (
@@ -20,7 +22,11 @@ const App = () => {
         <Route path="/movies" element={<Movies />} />
         <Route path="/tv" element={<Series />} />
         <Route path="/people" element={<Celebrities />} />
-        <Route path="/genres" element={<Genres />} />
+        <Route path="/genres">
+          <Route index element={<GenreListPage />} />
+          {/* Specific genre page - shows movies/shows for that genre */}
+          <Route path=":type/:genreId" element={<GenrePage />} />
+        </Route>
         <Route path="/:type/:id" element={<Info />} />
       </Routes>
 

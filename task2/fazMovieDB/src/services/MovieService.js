@@ -76,6 +76,23 @@ const getMovies = async (page) => {
   }
 };
 
+const getMovieByGenre = async (genreId, page = 1) => {
+  try {
+    const response = await axios.get(`${baseURL}/discover/movie`, {
+      params: {
+        api_key: tmdb_api,
+        with_genres: genreId,
+        language: "en-US",
+        page,
+      },
+    });
+    return response.data.results;
+  } catch (error) {
+    console.error("Error fetching movies by genre:", error);
+    throw error;
+  }
+};
+
 const getPopularMovies = async (page) => {
   try {
     const response = await axios.get(`${baseURL}/movie/popular`, {
@@ -137,6 +154,23 @@ const getSeries = async (page) => {
     return response.data.results;
   } catch (error) {
     console.error("Error fetching series:", error);
+    throw error;
+  }
+};
+
+const getSeriesByGenre = async (genreId, page = 1) => {
+  try {
+    const response = await axios.get(`${baseURL}/discover/tv`, {
+      params: {
+        api_key: tmdb_api,
+        with_genres: genreId,
+        language: "en-US",
+        page,
+      },
+    });
+    return response.data.results;
+  } catch (error) {
+    console.error("Error fetching series by genre:", error);
     throw error;
   }
 };
@@ -259,6 +293,6 @@ const getCelebDetails = async (celebId) => {
   }
 };
 
-export { getMovies, getPopularMovies, getMovieDetails, getMovieGenres,
-        getSeries, getPopularSeries, getSeriesDetails, getSeriesGenres,
+export { getMovies, getPopularMovies, getMovieDetails, getMovieGenres, getMovieByGenre,
+        getSeries, getPopularSeries, getSeriesDetails, getSeriesGenres, getSeriesByGenre,
         getTopRated, getCelebs, getCelebDetails, searchResults };

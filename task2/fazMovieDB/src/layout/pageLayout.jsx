@@ -1,8 +1,12 @@
-import { HomeIcon } from '@heroicons/react/24/solid';
+import { HomeIcon, ArrowDownIcon } from '@heroicons/react/24/solid';
 import { Link } from "react-router-dom";
+import Genres from '../components/Genre.jsx';
 import SearchBar from './SearchBar.jsx';
 
 const Navbar = ({ logo }) => {
+
+  const genreStyle = "bg-gray-950 text-gray-300 px-2 py-1 rounded-md m-1 cursor-pointer";
+  const genreContainer = "flex flex-wrap"
 
   return (
     <div className="navbar border-b-1 border-green-500 sticky top-0 z-50 w-full" style={{ boxShadow: '0 4px 10px rgba(34,197,94,0.5)' }}>
@@ -11,19 +15,41 @@ const Navbar = ({ logo }) => {
           <div className="logo text-green-500 p-2 text-4xl font-bold font-stretch-expanded" style={{fontFamily: "Impact"}}>
             <Link to="/">{logo}</Link>
           </div>
-          <div className="nav-links flex space-x-10 justify-between p-2">
-            <Link
+          <div className="nav-links flex space-x-10 items-center justify-between p-2">
+            {/*Movie dropdown */}
+            <div className='relative group'>
+              <Link
               to="/movies"
               className="border-b-2 border-transparent hover:border-blue-400 p-1"
             >
               Movies
             </Link>
-            <Link
-              to="/tv"
-              className="border-b-2 border-transparent hover:border-blue-400 p-1"
-            >
-              TV Shows
-            </Link>
+            <div className='absolute left-0 mt-2 w-64 bg-gray-900 rounded-lg shadow-lg hidden group-hover:block p-3 z-50'>
+              <Genres type="movie" genreStyle={genreStyle} className={genreContainer} />
+            </div>
+            </div>
+
+            <div className='relative group'>
+              <Link
+                to="/tv"
+                className="border-b-2 border-transparent hover:border-blue-400 p-1"
+              >
+                TV Shows
+              </Link>
+              <div className='absolute left-0 mt-2 w-64 bg-gray-900 rounded-lg shadow-lg hidden group-hover:block p-3 z-50'>
+                <Genres type="tv" genreStyle={genreStyle} className={genreContainer} />
+              </div>
+            </div>
+
+            <div className='relative group'>
+              <Link
+                to="/people"
+                className="border-b-2 border-transparent hover:border-blue-400 p-1"
+              >
+                People
+              </Link>
+            </div>
+
             <Link
               to="/people"
               className="border-b-2 border-transparent hover:border-blue-400 p-1"
@@ -36,6 +62,7 @@ const Navbar = ({ logo }) => {
             >
               Genres
             </Link>
+            
           </div>
         </div>
 
