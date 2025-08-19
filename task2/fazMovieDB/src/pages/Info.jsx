@@ -78,7 +78,7 @@ const Info = () => {
             <div className="flex flex-row justify-between items-start">
               <div className="flex flex-col">
                 <SubHeading heading="Genres" className="text-lg" />
-                <GenreList genres={genres} />
+                <GenreList genres={genres} type={type} />
               </div>
               <div className="flex flex-col">
                 <SubHeading heading="Rating" className="text-lg" />

@@ -1,8 +1,14 @@
 import { useNavigate } from "react-router-dom";
 
 
-const GenreList = ({ genres }) => {
+const GenreList = ({ genres, type }) => {
   const navigate = useNavigate();
+
+  const handleGenreClick = (genreId, genreName) => {
+    navigate(`/genres/${type}/${genreId}`, {
+      state: { genreName, type }
+    });
+  };
 
   return (
     <div className="flex flex-col space-y-2 my-0">
@@ -11,7 +17,7 @@ const GenreList = ({ genres }) => {
           <span
             key={genre.id}
             className="flex text-md hover:cursor-pointer hover:underline hover:text-blue-500 mt-1 ml-2"
-            onClick={() => navigate(`/genres/${genre.id}`)}
+            onClick={() => handleGenreClick(genre.id, genre.name)}
           >
             {genre.name}
             {", "}
