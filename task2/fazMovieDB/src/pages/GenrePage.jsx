@@ -24,7 +24,7 @@ const GenrePage = () => {
       <Heading
         heading={`${genreName} ${type === "movie" ? "Movies" : "TV Shows"}`}
         level={1}
-        className="w-full flex justify-center"
+        className="w-full flex justify-center mb-8 mx-auto"
       />
 
       <MovieGrid

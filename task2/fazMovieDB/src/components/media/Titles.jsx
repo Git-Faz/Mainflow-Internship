@@ -8,7 +8,7 @@ const Heading = ({ heading, className, hClass }) =>{
   )
 }
 
-const SubHeading = ({ heading, className }) => {
+const SubHeading = ({ heading, className="" }) => {
   return (
     <div className={`mx-2 ${className}`}>
       <h2 className={`flex justify-start text-2xl font-medium p-2 text-white border-gray-500 border-b-2 text-left w-fit`}>

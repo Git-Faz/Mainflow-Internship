@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getMovieGenres, getSeriesGenres } from "../services/MovieService";
 
-const Genres = ({ type, className, genreStyle }) => {
+const Genre = ({ type, className, genreStyle }) => {
   const [genreList, setGenreList] = useState([]);
   const navigate = useNavigate();
 
@@ -45,4 +45,4 @@ const Genres = ({ type, className, genreStyle }) => {
   );
 };
 
-export default Genres;
+export default Genre;

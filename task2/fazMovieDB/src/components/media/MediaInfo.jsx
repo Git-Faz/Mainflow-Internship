@@ -1,12 +1,11 @@
 import { useNavigate } from "react-router-dom";
 
-
 const GenreList = ({ genres, type }) => {
   const navigate = useNavigate();
 
   const handleGenreClick = (genreId, genreName) => {
     navigate(`/genres/${type}/${genreId}`, {
-      state: { genreName, type }
+      state: { genreName, type },
     });
   };
 
@@ -16,7 +15,7 @@ const GenreList = ({ genres, type }) => {
         {genres?.map((genre) => (
           <span
             key={genre.id}
-            className="flex text-md hover:cursor-pointer hover:underline hover:text-blue-500 mt-1 ml-2"
+            className="flex text-sm sm:text-md hover:cursor-pointer hover:underline hover:text-blue-500 mt-1 ml-2"
             onClick={() => handleGenreClick(genre.id, genre.name)}
           >
             {genre.name}
@@ -30,35 +29,34 @@ const GenreList = ({ genres, type }) => {
 
 const MediaRating = ({ rating, voteCount }) => {
   return (
-    <div className="flex flex-row items-center space-x-2">
-      <span className="text-yellow-400 font-bold text-2xl">
+    <div className="flex flex-col ml-2 sm:flex-row items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-2">
+      <span className="text-yellow-400 font-bold text-xl sm:text-2xl">
         {rating ? rating.toFixed(1) : "N/A"}
       </span>
-      <span className="text-gray-400 text-sm">
+      <span className="text-gray-400 text-xs sm:text-sm">
         {voteCount ? `(${voteCount} votes)` : ""}
       </span>
     </div>
   );
 };
 
-const VideoCard = ({ video }) => {
+const VideoCard = ({ video, vidContStyle }) => {
   return (
-    <div className="video-card">
+    <div className={`${vidContStyle}`}>
       <iframe
         width="100%"
-        height="75%"
+        height="200"
         src={video}
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
-        className="my-2 aspect-video rounded"
+        className="my-2 rounded aspect-video sm:h-[315px]"
       ></iframe>
     </div>
   );
 };
 
-const CastList = ({ cast }) => {
-
+const CastList = ({ cast, containerStyle }) => {
   const navigate = useNavigate();
 
   const handleActorClick = (actorId) => {
@@ -68,7 +66,11 @@ const CastList = ({ cast }) => {
   return (
     <>
       {cast?.map((actor) => (
-        <div key={actor.id} className="flex-shrink-0 w-24 mr-2" onClick={() => handleActorClick(actor.id)}>
+        <div
+          key={actor.id}
+          className={`w-20 sm:w-24 ${containerStyle}`}
+          onClick={() => handleActorClick(actor.id)}
+        >
           <img
             src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`}
             alt={actor.name}

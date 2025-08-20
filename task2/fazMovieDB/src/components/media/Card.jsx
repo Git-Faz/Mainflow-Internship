@@ -1,21 +1,20 @@
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const Card = ({ title, image, description, id, type }) => {
+const Card = ({ title, image, description, id, type, containerStyle }) => {
     const navigate = useNavigate();
-    const location = useLocation();
 
     const handleClick = () => {
         console.log(`Clicked on ${title}`);
         navigate(`/${type}/${id}`);
     };
 
-    const cardSize = location.pathname === "/" ? "w-46" : "w-50";
+    //const cardSize = location.pathname === "/" ? "w-46" : "w-50";
 
 return (
-    <div className={`movie-card bg-gray-950 rounded-lg shadow-lg overflow-hidden m-2 ${cardSize} h-auto flex flex-col cursor-pointer`}
+    <div className={`movie-card bg-black rounded-lg shadow-lg overflow-hidden h-auto flex flex-col cursor-pointer ${containerStyle}`}
                      onClick={handleClick}>
         <img src={image} alt={title} className="w-full h-auto object-contain" />
-        <div className="p-3 flex flex-col border-t-2 border-gray-500">
+        <div className="p-3 flex flex-col border-t border-gray-500">
             <h2 className="text-base font-bold text-white mb-2">{title}</h2>
             <p className="text-xs text-gray-300 line-clamp-3">{description}</p>
         </div>

@@ -53,11 +53,11 @@ const MovieGrid = ({ fetchData, type, className }) => {
   };
 
   return (
-    <div className={`movie-grid-container ${className}`}>
+    <div className={`movie-grid-container ${className} px-2 sm:px-4 lg:px-8`}>
       {loading ? (
         <div className="loading-placeholder">Loading...</div>
       ) : (
-        <div className="movie-grid flex flex-row flex-wrap justify-center my-2">
+        <div className="movie-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6 gap-4 my-2">
         {items.map((item, index) => (
           <Card
             key={index}
@@ -70,17 +70,18 @@ const MovieGrid = ({ fetchData, type, className }) => {
                 : `${imgLink}${item.profile_path}`
             }
             description={item.overview}
+            containerStyle={"border-t-2 border-gray-500"}
           />) 
           )}
         </div>
       )}
       { (location.pathname !== "/") && (
-        <div className="flex flex-row my-4 justify-center space-x-4 text-white">
-          <button className="p-2 bg-green-500 rounded px-4" onClick={() => prevPage()}>
-            <ArrowLeftCircleIcon className="h-5 w-5 inline-block" />
+        <div className="flex flex-row my-4 justify-center space-x-2 sm:space-x-4 text-white px-2">
+          <button className="p-2 bg-green-500 rounded px-3 sm:px-4 text-sm sm:text-base" onClick={() => prevPage()}>
+            <ArrowLeftCircleIcon className="h-4 w-4 sm:h-5 sm:w-5 inline-block" />
           </button>
-          <button className="p-2 bg-green-500 rounded px-4" onClick={() => nextPage()}>
-            <ArrowRightCircleIcon className="h-5 w-5 inline-block" />
+          <button className="p-2 bg-green-500 rounded px-3 sm:px-4 text-sm sm:text-base" onClick={() => nextPage()}>
+            <ArrowRightCircleIcon className="h-4 w-4 sm:h-5 sm:w-5 inline-block" />
           </button>
         </div>
       )}

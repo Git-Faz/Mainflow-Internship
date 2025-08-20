@@ -4,11 +4,12 @@ import Genres from "../components/Genre.jsx";
 
 const GenreListPage = () => {
   const [activeType, setActiveType] = useState("movie");
+  
   const activeStyle = "bg-green-500 text-black font-bold"
   const inactiveStyle = "text-gray-300 hover:text-white font-bold"
 
   return (
-    <div className="h-[80vh] mx-auto px-4 py-6">
+    <div className="lg:h-[79vh] sm:h-fit md:h-fit mx-auto px-4 py-6">
       <Heading
         heading="Browse by Genre"
         className="w-full flex justify-center mb-8"

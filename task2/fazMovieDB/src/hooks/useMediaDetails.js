@@ -40,6 +40,7 @@ const useMediaDetails = (id, type) => {
           : null;
 
         result.cast = result.credits?.cast?.slice(0, 10) || [];
+        result.release_date = result.release_date || result.first_air_date;
 
         setData(result);
       } catch (error) {

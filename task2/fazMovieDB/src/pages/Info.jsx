@@ -52,8 +52,8 @@ const Info = () => {
   const isMovieOrTv = type === "movie" || type === "tv";
 
   return (
-    <div className="info grid grid-cols-3 gap-4 text-white mx-4 my-1 p-4 content-start items-start h-fit">
-      <div className="info-img col-span-1 flex">
+    <div className="info grid grid-cols-1 md:grid-cols-3 gap-4 text-white mx-2 sm:mx-4 my-1 p-2 sm:p-4 content-start items-start h-fit">
+      <div className="info-img col-span-1 flex justify-center md:justify-start">
         <img
           src={
             poster_path
@@ -63,11 +63,11 @@ const Info = () => {
               : "/placeholder.jpg"
           }
           alt={title || name}
-          className="image mt-6"
+          className="image mt-6 max-w-full h-auto"
         />
       </div>
 
-      <div className="info-text col-span-2 flex flex-col px-2 space-y-2">
+      <div className="info-text col-span-1 md:col-span-2 flex flex-col px-2 space-y-2">
         {/* Title */}
         <Heading heading={title || name} className="my-2" />
         <p className="p2 mx-2 mb-0">{overview || biography}</p>
@@ -75,17 +75,14 @@ const Info = () => {
         {/* Genres + Rating */}
         {isMovieOrTv && (
           <div className="flex flex-col space-y-2 my-0">
-            <div className="flex flex-row justify-between items-start">
-              <div className="flex flex-col">
+            <div className="flex flex-col w-fit sm:flex-row lg:justify-between md:justify-start sm:justify-self-start items-start gap-4">
+              <div className="flex flex-col w-fit sm:flex-wrap">
                 <SubHeading heading="Genres" className="text-lg" />
                 <GenreList genres={genres} type={type} />
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col w-fit">
                 <SubHeading heading="Rating" className="text-lg" />
-                <MediaRating
-                  rating={vote_average}
-                  voteCount={vote_count}
-                />
+                <MediaRating rating={vote_average} voteCount={vote_count} />
               </div>
             </div>
           </div>
@@ -93,7 +90,7 @@ const Info = () => {
 
         {/* Trailer */}
         {isMovieOrTv && (
-          <div className="flex flex-col space-y-2 flex-1">
+          <div className="col-span-1 md:col-span-3 flex flex-col space-y-2">
             <SubHeading heading="Trailer" className="text-lg" />
             {video_url ? (
               <VideoCard video={video_url} />
@@ -106,10 +103,10 @@ const Info = () => {
 
       {/* Cast */}
       {isMovieOrTv && (
-        <div className="flex flex-col col-span-3 space-y-2">
+        <div className="flex flex-col col-span-1 md:col-span-3 space-y-2 w-full">
           <SubHeading heading="Cast" />
-          <div className="flex flex-wrap justify-between">
-            <CastList cast={cast} />
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 justify-items-center gap-x-2 gap-y-4 p-2">
+            <CastList cast={cast} containerStyle="m-0" />
           </div>
         </div>
       )}

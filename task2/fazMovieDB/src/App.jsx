@@ -1,6 +1,6 @@
 //import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Navbar, Footer } from "./layout/pageLayout";
+import { Header, Footer } from "./layout/pageLayout";
 import Home from "./pages/Home";
 import Movies from "./pages/Movies";
 import Series from "./pages/Series";
@@ -15,7 +15,7 @@ import "./App.css";
 const App = () => {
   return (
     <BrowserRouter>
-      <Navbar logo={"FMDB"} />
+      <Header logo={"FMDB"} />
 
       <Routes>
         <Route path="/" element={<Home />} />
