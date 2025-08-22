@@ -71,7 +71,7 @@ const Filter = ({ type, onFilterChange, className = "" }) => {
 
       {/* Filter Options */}
       <div className={`${isExpanded ? "block" : "hidden"} md:block`}>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-4 items-end">
           {/* Genre Filter */}
           <div>
             <label className="block text-sm font-medium text-gray-300 mb-2">
@@ -147,22 +147,26 @@ const Filter = ({ type, onFilterChange, className = "" }) => {
               ))}
             </select>
           </div>
-        </div>
 
-        {/* Buttons Row */}
-        <div className="mt-4 flex flex-col sm:flex-row gap-2">
-          <button
-            onClick={handleReset}
-            className="flex-1 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md transition-colors"
-          >
-            Reset Filters
-          </button>
-          <button
-            onClick={handleApply}
-            className="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors"
-          >
-            Apply Filters
-          </button>
+          {/* Reset Button */}
+          <div>
+            <button
+              onClick={handleReset}
+              className="w-full px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md transition-colors"
+            >
+              Reset Filters
+            </button>
+          </div>
+
+          {/* Apply Button */}
+          <div>
+            <button
+              onClick={handleApply}
+              className="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors"
+            >
+              Apply Filters
+            </button>
+          </div>
         </div>
       </div>
     </div>
