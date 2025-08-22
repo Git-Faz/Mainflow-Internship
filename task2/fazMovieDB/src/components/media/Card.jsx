@@ -1,25 +1,26 @@
 import { useNavigate } from "react-router-dom";
 
 const Card = ({ title, image, description, id, type, containerStyle }) => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const handleClick = () => {
-        console.log(`Clicked on ${title}`);
-        navigate(`/${type}/${id}`);
-    };
+  const handleClick = () => {
+    console.log(`Clicked on ${title}`);
+    navigate(`/${type}/${id}`);
+  };
 
-    //const cardSize = location.pathname === "/" ? "w-46" : "w-50";
 
-return (
-    <div className={`movie-card bg-black rounded-lg shadow-lg overflow-hidden h-auto flex flex-col cursor-pointer ${containerStyle}`}
-                     onClick={handleClick}>
-        <img src={image} alt={title} className="w-full h-auto object-contain" />
-        <div className="p-3 flex flex-col border-t border-gray-500">
-            <h2 className="text-base font-bold text-white mb-2">{title}</h2>
-            <p className="text-xs text-gray-300 line-clamp-3">{description}</p>
-        </div>
+  return (
+    <div
+      className={`movie-card w-fit bg-black rounded-lg shadow-lg overflow-hidden h-auto flex flex-col cursor-pointer ${containerStyle}`}
+      onClick={handleClick}
+    >
+      <img src={image} alt={title} className="w-full h-auto object-contain" />
+      <div className="p-3 flex flex-col border-t border-gray-500">
+        <h2 className="text-base font-bold text-white mb-2">{title}</h2>
+        <p className="text-xs text-gray-300 line-clamp-3">{description}</p>
+      </div>
     </div>
-);
+  );
 };
 
 export default Card;

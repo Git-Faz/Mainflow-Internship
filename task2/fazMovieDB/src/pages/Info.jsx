@@ -75,7 +75,7 @@ const Info = () => {
         {/* Genres + Rating */}
         {isMovieOrTv && (
           <div className="flex flex-col space-y-2 my-0">
-            <div className="flex flex-col w-fit sm:flex-row lg:justify-between md:justify-start sm:justify-self-start items-start gap-4">
+            <div className="flex flex-row w-full justify-between items-start gap-4">
               <div className="flex flex-col w-fit sm:flex-wrap">
                 <SubHeading heading="Genres" className="text-lg" />
                 <GenreList genres={genres} type={type} />

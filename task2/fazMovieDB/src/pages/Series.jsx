@@ -1,10 +1,10 @@
 import MediaPage from "../components/MediaPage";
-import { getSeries } from "../services/MovieService";
+import { getFilteredSeries } from "../services/MovieService";
 
 const Series = () => {
 
   return (
-    <MediaPage heading={"TV Shows"} fetchData={getSeries} type={"tv"} />
+    <MediaPage heading={"TV Shows"} fetchData={getFilteredSeries} type={"tv"} />
   );
 };
 

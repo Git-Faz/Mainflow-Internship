@@ -9,7 +9,7 @@ const searchResults = async (query) => {
       params:{
         api_key: tmdb_api,
         query: query,
-        include_adult: "true",
+        include_adult: "false",
         language: "en-US",
         page: "1"
       }
@@ -62,7 +62,7 @@ const getMovies = async (page) => {
     const response = await axios.get(`${baseURL}/discover/movie`, {
       params: {
         api_key: tmdb_api,
-        include_adult: "true",
+        include_adult: "false",
         include_video: "false",
         language: "en-US",
         page,
@@ -293,6 +293,70 @@ const getCelebDetails = async (celebId) => {
   }
 };
 
+const getFilteredMovies = async (page = 1, filters = {}) => {
+  try {
+    const params = {
+      api_key: tmdb_api,
+      language: "en-US",
+      page,
+      sort_by: filters.sortBy || "popularity.desc",
+      include_adult: "false",
+    };
+
+    // Filter by genre
+    if (filters.genre) {
+      params.with_genres = filters.genre;
+    }
+
+    // Filter by release year
+    if (filters.releaseYear) {
+      params.primary_release_year = filters.releaseYear;
+    }
+
+     if (filters.minRating) {
+      params["vote_average.gte"] = filters.minRating;
+    }
+
+    const response = await axios.get(`${baseURL}/discover/movie`, { params });
+    return response.data.results;
+  } catch (error) {
+    console.error("Error fetching filtered movies:", error);
+    throw error;
+  }
+};
+
+const getFilteredSeries = async (page = 1, filters = {}) => {
+  try {
+    const params = {
+      api_key: tmdb_api,
+      language: "en-US",
+      page,
+      sort_by: filters.sortBy || "popularity.desc",
+      include_adult: "false",
+    };
+
+    // Filter by genre
+    if (filters.genre) {
+      params.with_genres = filters.genre;
+    }
+
+    // Filter by release year
+    if (filters.releaseYear) {
+      params.first_air_date_year = filters.releaseYear;
+    }
+
+    if (filters.minRating) {
+      params["vote_average.gte"] = filters.minRating;
+    }
+
+    const response = await axios.get(`${baseURL}/discover/tv`, { params });
+    return response.data.results;
+  } catch (error) {
+    console.error("Error fetching filtered series:", error);
+    throw error;
+  }
+};
+
 export { getMovies, getPopularMovies, getMovieDetails, getMovieGenres, getMovieByGenre,
         getSeries, getPopularSeries, getSeriesDetails, getSeriesGenres, getSeriesByGenre,
-        getTopRated, getCelebs, getCelebDetails, searchResults };
+        getTopRated, getCelebs, getCelebDetails, searchResults, getFilteredMovies, getFilteredSeries };

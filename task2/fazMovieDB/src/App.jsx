@@ -9,8 +9,6 @@ import GenrePage from "./pages/GenrePage";
 import GenreListPage from "./pages/GenreListPage";
 import Celebrities from "./pages/Celebrities";
 import footerLogo from "./assets/github.svg";
-import "./App.css";
-
 
 const App = () => {
   return (

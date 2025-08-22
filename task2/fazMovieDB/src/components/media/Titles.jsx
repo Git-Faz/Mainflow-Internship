@@ -1,21 +1,25 @@
-const Heading = ({ heading, className, hClass }) =>{
-  return(
-    <div className={`mx-2 ${className}`}>
-      <h1 className={`flex justify-start text-4xl font-medium p-2 border-b-2 border-green-500 text-white text-left w-fit ${hClass}`}>
+const Heading = ({ heading, className = "", hClass = "" }) => {
+  return (
+    <div className={`${className}`}>
+      <h1
+        className={`flex flex-row text-4xl font-medium p-2 border-b-2 border-green-500 text-white text-left ${hClass}`}
+      >
         {heading}
       </h1>
     </div>
-  )
-}
+  );
+};
 
-const SubHeading = ({ heading, className="" }) => {
+const SubHeading = ({ heading, className = "" }) => {
   return (
     <div className={`mx-2 ${className}`}>
-      <h2 className={`flex justify-start text-2xl font-medium p-2 text-white border-gray-500 border-b-2 text-left w-fit`}>
+      <h2
+        className={`flex justify-start text-2xl font-medium p-2 text-white border-gray-500 border-b-2 text-left w-fit`}
+      >
         {heading}
       </h2>
     </div>
-  )
-}
+  );
+};
 
 export { Heading, SubHeading };
