@@ -30,7 +30,7 @@ const App = () => {
 
       <Footer
         name={"Git-Faz"}
-        link={"https://github.com/Git-Faz"}
+        link={"https://github.com/Git-Faz/Mainflow-Internship/tree/main/task2/fazMovieDB"}
         logo={footerLogo}
       />
     </BrowserRouter>
