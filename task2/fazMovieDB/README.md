@@ -1,12 +1,51 @@
-# React + Vite
+# Faz Movie DB
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive movie and TV show web application built with **React**, powered by **The Movie Database (TMDB) APIs**, and keysand styled using **TailwindCSS**.  
 
-Currently, two official plugins are available:
+Deployed on **Vercel** for fast and seamless hosting.  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Tech Stack
+- **Frontend:** React + TailwindCSS  
+- **APIs:** TMDB APIs  
+- **Runtime:** Node.js  
+- **Bundler:** Vite  
+- **Deployment:** Vercel  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## Packages Used
+- **Axios** – for API calls  
+- **Heroicons** – for icons  
+- **React Router v7** – for routing/navigation  
+- **ESLint** – for linting and clean code standards  
+
+---
+
+## React Hooks
+### Default Hooks
+- `useState`  
+- `useEffect`  
+- `useCallback`  
+- `useParams`  
+- `useNavigate`  
+- `useLocation`  
+
+### Custom Hooks
+- **`useMediaDetails`** – Fetches and manages state for movie/series details (uses `useEffect` + `useState`).  
+- **`useFilter`** – Fetches available filters and manages filtering/sorting of media (uses `useEffect` + `useState`).  
+
+---
+
+## Project Highlights
+- **Reusable Components** – Modular and reusable UI components.  
+- **Custom Hooks** – Logic separated from the UI layer for better maintainability.  
+- **Clean Structure** – Organized project folder layout for scalability.  
+- **Best Practices** – Followed React coding standards and ESLint rules.
+- **API Key** - Obtained API keys from TMDB to securely access and fetch media data.    
+
+---
+
+## Deployment
+- Hosted on **Vercel** with automatic builds and deployments.  
