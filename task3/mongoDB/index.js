@@ -118,14 +118,22 @@ const updateSalary = async () => {
 
 const runFunctions = async () => {
     await connectDB();
-    await findUsers();
-    await deleteAllUsers();
-    await addSingleUser();
-    await insertManyUsers();
-    await findUserByProf();
-    await findUserByAge();
-    await updateSalary();
-    await findUsers(); //sort
+
+    const tasks = [
+        findUsers,
+        deleteAllUsers,
+        addSingleUser,
+        insertManyUsers,
+        findUserByProf,
+        findUserByAge,
+        updateSalary,
+        findUsers, //sort
+    ];
+
+    for (const task of tasks) {
+        await task();
+    }
+
     await mongoose.connection.close();
     console.log("\nDB connection closed");
 };
