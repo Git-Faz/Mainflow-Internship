@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { configDotenv } from "dotenv";
-import User from "./models/users.js";
+import User0 from "./models/users.js";
 
 configDotenv();
 
@@ -18,7 +18,7 @@ const connectDB = async () => {
 
 const findUsers = async () => {
     try {
-        const users = await User.find({}).sort({salary: -1});
+        const users = await User0.find({}).sort({salary: -1});
         console.log("\nAll users:", users);
     } catch (error) {
         console.error("Error retrieving users:", error);
@@ -27,7 +27,7 @@ const findUsers = async () => {
 
 const deleteAllUsers = async () => {
     try {
-        await User.deleteMany({});
+        await User0.deleteMany({});
         console.log("\nAll users deleted successfully");
     } catch (error) {
         console.error("Error deleting users:", error);
@@ -36,7 +36,7 @@ const deleteAllUsers = async () => {
 
 const addSingleUser = async () => {
     try {
-        const user = new User({
+        const user = new User0({
             name: "Fedora One",
             email: "fedora.one@example.com",
             password: "securepassword",
@@ -79,7 +79,7 @@ const insertManyUsers = async () => {
                 salary: 900000,
             },
         ];
-        await User.insertMany(users);
+        await User0.insertMany(users);
         console.log("\nUsers saved successfully");
     } catch (error) {
         console.error("Error saving users:", error);
@@ -88,7 +88,7 @@ const insertManyUsers = async () => {
 
 const findUserByProf = async () => {
     try {
-        const users = await User.find({ profession: "developer" });
+        const users = await User0.find({ profession: "developer" });
         console.log("\nUsers with profession 'developer':", users);
     } catch (error) {
         console.error("Error retrieving users by profession:", error);
@@ -97,7 +97,7 @@ const findUserByProf = async () => {
 
 const findUserByAge = async () => {
     try {
-        const users = await User.find({ age: { $gte: 30 } });
+        const users = await User0.find({ age: { $gte: 30 } });
         console.log("\nUsers with age 30 and above:", users);
     } catch (error) {
         console.error("Error retrieving users by age:", error);
@@ -106,7 +106,7 @@ const findUserByAge = async () => {
 
 const updateSalary = async () => {
     try {
-        const result = await User.updateMany(
+        const result = await User0.updateMany(
             { profession: "developer" },
             { $inc: { salary: 5000 } }
         );

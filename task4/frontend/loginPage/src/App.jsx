@@ -1,50 +1,64 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 const App = () => {
-    const [details, setDetails] = useState({ username: "", password: "" });
+    const [_details, setDetails] = useState({ username: "", password: "" });
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        setDetails({
+
+        const formData = {
             username: e.target.username.value,
             password: e.target.password.value,
-        });
-        console.log(details);
-    };
+        };
 
-    useEffect(() => {
-
-        if (details.username.length < 3) {
+        // Validate input
+        if (formData.username.length < 3) {
             console.error("Username must be at least 3 characters long");
             return;
         }
 
-        if (details.password.length < 8) {
+        if (formData.password.length < 8) {
             console.error("Password must be at least 8 characters long");
             return;
         }
 
-        if (details.username && details.password) {
-            console.log("Logging in with:", details);
-            axios.post("http://localhost:5000/login", details)
-                .then((response) => {
-                    console.log("Login successful:", response.data);
-                })
-                .catch((error) => {
-                    console.error("Login failed:", error);
-                });
+        try {
+            console.log("Logging in with:", formData);
+            const response = await axios.post(
+                "http://localhost:3000/login",
+                formData
+            );
+            console.log("Login successful:", response.data);
+            setDetails(formData); // Update state after successful login
+        } catch (error) {
+            console.error(
+                "Login failed:",
+                error.response?.data?.message || error.message
+            );
         }
-    }, [details]);
+    };
+
     return (
         <div>
             <h1>Login</h1>
             <form onSubmit={handleLogin}>
-                <input type="text" placeholder="Username" name="username" />
-                <input type="password" placeholder="Password" name="password" />
+                <input
+                    type="text"
+                    placeholder="Username"
+                    name="username"
+                    required
+                />
+                <input
+                    type="password"
+                    placeholder="Password"
+                    name="password"
+                    required
+                />
                 <button type="submit">Login</button>
             </form>
         </div>
     );
 };
+
 export default App;
