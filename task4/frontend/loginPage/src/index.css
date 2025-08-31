@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+#root{
+    @apply flex flex-col items-center justify-center m-2 h-screen w-screen;
+}
+
+input {
+    @apply border border-gray-300 p-2 rounded w-full ;
+}
+
+label {
+    @apply block mb-1 font-medium;
+}
+
