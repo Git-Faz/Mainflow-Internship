@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dynamic Login Form</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+  }
+  form {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+  }
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  input[type="email"], input[type="password"] {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1em;
+    background-color: #fafafa;
+  }
+  input[type="email"]:focus, input[type="password"]:focus {
+    outline: none;
+    border-color: #007BFF;
+    background-color: #e7f0fe;
+  }
+  button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 1em;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background-color: #0056b3;
+  }
+  .error {
+    border-color: red !important;
+  }
+</style>
+</head>
+<body>
+<script>
+  function createLoginForm() {
+    const form = document.createElement('form');
+    form.id = 'loginForm';
+
+    // Heading
+    const heading = document.createElement('h2');
+    heading.textContent = 'Login';
+    form.appendChild(heading);
+
+    // Email label and input
+    const emailLabel = document.createElement('label');
+    emailLabel.for = 'email';
+    emailLabel.textContent = 'Email';
+    form.appendChild(emailLabel);
+
+    const emailInput = document.createElement('input');
+    emailInput.type = 'email';
+    emailInput.id = 'email';
+    emailInput.name = 'email';
+    emailInput.placeholder = 'Enter your email';
+    form.appendChild(emailInput);
+
+    // Password label and input
+    const passwordLabel = document.createElement('label');
+    passwordLabel.for = 'password';
+    passwordLabel.textContent = 'Password';
+    form.appendChild(passwordLabel);
+
+    const passwordInput = document.createElement('input');
+    passwordInput.type = 'password';
+    passwordInput.id = 'password';
+    passwordInput.name = 'password';
+    passwordInput.placeholder = 'Enter your password';
+    form.appendChild(passwordInput);
+
+    // Login button
+    const loginButton = document.createElement('button');
+    loginButton.type = 'submit';
+    loginButton.textContent = 'Login';
+    form.appendChild(loginButton);
+
+    // Form submit event listener
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const emailVal = emailInput.value.trim();
+      const passwordVal = passwordInput.value.trim();
+
+      // Reset previous errors
+      emailInput.classList.remove('error');
+      passwordInput.classList.remove('error');
+
+      if (!emailVal) {
+        alert('Please enter your email.');
+        emailInput.classList.add('error');
+        emailInput.focus();
+        return;
+      }
+      if (!passwordVal) {
+        alert('Please enter your password.');
+        passwordInput.classList.add('error');
+        passwordInput.focus();
+        return;
+      }
+
+      alert('Email: ' + emailVal + ' Password: ' + passwordVal);
+    });
+
+    // Append form to body
+    document.body.appendChild(form);
+  }
+
+  // Generate login form on page load
+  window.onload = createLoginForm;
+</script>
+</body>
+</html>
